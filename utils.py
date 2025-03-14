@@ -31,16 +31,16 @@ class UNet(nn.Module):
         self.downscale = nn.MaxPool2d(2)
         self.upscale = nn.Upsample(scale_factor=2)
 
-        def forward(self, x):
-            h = []
-            for i, layer in enumerate(self.down_layers):
-                x = self.silu(layer(x)) # go through layer and activation function
-                if i < 2:
-                    h.append(x) # store out for skipping in UNet
-                    x = self.downscale(x)
+    def forward(self, x):
+        h = []
+        for i, layer in enumerate(self.down_layers):
+            x = self.silu(layer(x)) # go through layer and activation function
+            if i < 2:
+                h.append(x) # store out for skipping in UNet
+                x = self.downscale(x)
 
-            for i, layer in enumerate(self.up_layers):
-                if i > 0: # for all but the first uplayer
-                    x = self.upscale(x)
-                    x += h.pop()
-                x = self.silu(layer(x))
+        for i, layer in enumerate(self.up_layers):
+            if i > 0: # for all but the first uplayer
+                x = self.upscale(x)
+                x += h.pop()
+            x = self.silu(layer(x))
