@@ -40,7 +40,9 @@ class UNet(nn.Module):
                 x = self.downscale(x)
 
         for i, layer in enumerate(self.up_layers):
-            if i > 0: # for all but the first uplayer
+            if i > 0: # for all but the first up-layer
                 x = self.upscale(x)
                 x += h.pop()
             x = self.silu(layer(x))
+
+        return x
