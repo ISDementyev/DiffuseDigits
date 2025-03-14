@@ -5,6 +5,7 @@ from torch.nn import functional as F
 from torch.utils.data import DataLoader
 from diffusers import DDPMScheduler, UNet2DModel
 from matplotlib import pyplot as plt
+from utils import UNet
 
 seed = 1
 torch.manual_seed(seed)
@@ -28,4 +29,6 @@ if __name__ == "__main__":
     # axs[0].imshow(torchvision.utils.make_grid(x)[0], cmap="Greys")
     # plt.show()
 
-
+    net = UNet()
+    x = torch.rand(8, 1, 28, 28)
+    print(net(x).shape)
