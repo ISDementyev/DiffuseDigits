@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-
 def corrupt(x, intensity):
     noise = torch.randn_like(x)
     intensity = intensity.view(-1, 1, 1, 1)
