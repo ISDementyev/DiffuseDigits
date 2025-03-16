@@ -1,4 +1,3 @@
-# Dataloader (you can mess with batch size)
 import torch
 import torchvision
 from torch import nn
@@ -84,9 +83,6 @@ def load_data(data_dir="./mnist"):
         transforms.Normalize((mnist_mean,), (mnist_std,)),
     ])
 
-    # We add FileLock here because multiple workers will want to
-    # download data, and this may cause overwrites since
-    # DataLoader is not threadsafe.
     with FileLock(os.path.expanduser("~/.data.lock")):
         trainset = torchvision.datasets.MNIST(
             root=data_dir, train=True, download=True, transform=transform)
@@ -111,6 +107,7 @@ def load_test_data():
 def train_diffusion(config):
     net = BasicUNet()
     net.to(device)
+
     # The optimizer
     opt = torch.optim.Adam(net.parameters(), lr=config["lr"])
     loss_fn = nn.MSELoss()
@@ -211,7 +208,7 @@ def main(num_samples=50, gpus_per_trial=1, smoke_test=False):
 
     # test_best_model(best_result, smoke_test=smoke_test)
 
-
+# This trains the UNet, given a list of different hyperparameters (e.g. epoch list, etc.)
 def train_variants(batch_size_list, learning_rates_list, epoch_list):
     final_unets = []
     unets_and_last_5_epochs = []
@@ -246,7 +243,7 @@ def train_variants(batch_size_list, learning_rates_list, epoch_list):
                         pred = net(noisy_x)
 
                         # Calculate the loss
-                        loss = loss_fn(pred, x)  # How close is the output to the true 'clean' x?
+                        loss = loss_fn(pred, x)
 
                         # Backprop and update the params:
                         opt.zero_grad()
