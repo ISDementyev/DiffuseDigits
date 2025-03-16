@@ -286,3 +286,6 @@ learning_rates_list = [1e-4, 5e-4, 1e-3, 5e-3, 1e-2]
 epoch_list = [5, 10, 15, 20, 25]
 all_trained_models = train_variants(batch_size_list, learning_rates_list, epoch_list)
 print(f"Final time: {time() - t1} s")
+
+# best hyperparameters (batch_size 16, learning_rate 5e-4, n_epochs 10)
+# Final Loss (Goal set of <0.1): 0.069
