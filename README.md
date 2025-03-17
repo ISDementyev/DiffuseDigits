@@ -17,3 +17,6 @@ An example of generated digits are the following:
 As can be seen, viable digits from 0-9 are shown.
 The model performs the best for ones (1), eights (8)
 and nines (9).
+
+## Acknowledgements
+This work was done with the help of the [HuggingFace Diffusion Models course](https://huggingface.co/learn/diffusion-course/en/unit1/3).
