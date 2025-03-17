@@ -7,6 +7,7 @@ After extensive hyperparameter optimization (using both RayTune and custom modul
 the best (lowest-loss) model is a batch size of 
 16, a learning rate of 5e-4 and 10 as the number of epochs.
 
+## Data
 The following is an example of the input, and the model's prediction:
 ![Inputs and Predictions](input_vs_pred.png)
 
