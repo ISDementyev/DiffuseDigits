@@ -12,7 +12,7 @@ The following is an example of the input, and the model's prediction:
 ![Inputs and Predictions](input_vs_pred.png)
 
 An example of generated digits are the following:
-![Generated digits](Generated_digits_ex.png)
+![Generated digits](generated_digits_ex.png)
 
 As can be seen, viable digits from 0-9 are shown.
 The model performs the best for ones (1), eights (8)
